@@ -99,7 +99,8 @@
   environment.systemPackages = [
     pkgs.firefox # Browser    
     pkgs.vlc # Na přehrávání médií
-    inputs.ekkles.packages."x86_64-linux".default
+    inputs.ekkles.packages."x86_64-linux".ekkles # GUI Ekklesu
+    inputs.ekkles.packages."x86_64-linux".ekkles-cli # Pro import do databáze
   ];
 
   
