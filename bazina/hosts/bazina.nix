@@ -8,7 +8,7 @@
   imports =
     [ # Include the results of the hardware scan.
       ./bazina-hardware.nix
-      ./../modules/cli.nix # CLI utilitky
+      ./../../spolecne/cli.nix # CLI utilitky
       ./../modules/ollama.nix # Lokální LLMka
       # Nefunguje :( sice se připojím a mám obraz, ale okno na wotko se nespustí ./../modules/sunshine.nix # Lokálni cloud gaming
     ];

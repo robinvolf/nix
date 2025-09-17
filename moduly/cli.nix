@@ -52,8 +52,13 @@
     tokei                # Spočítá řádky kódu
     brightnessctl        # Ovládání jasu obrazovky
     ffmpeg               # Audio-video manipulace
-    nvtopPackages.amd    # Monitorování GPU (AMD)
-    nvtopPackages.intel  # Monitorování GPU (Intel)
-    nvtopPackages.nvidia # Monitorování GPU (NVidia)
+
+    # Toto je velice HW specifické a obzvlášť nvidia, která si natáhne cuda package,
+    # který je obrovský a dlouho se buildí
+    # TODO: Nějak modularizovat (třá si vzít vstup a podle toho)
+    
+    # nvtopPackages.amd    # Monitorování GPU (AMD)
+    # nvtopPackages.intel  # Monitorování GPU (Intel)
+    # nvtopPackages.nvidia # Monitorování GPU (NVidia)
   ];  
 }

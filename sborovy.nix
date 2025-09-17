@@ -3,16 +3,15 @@
 {
   # HW konfigurace
   imports = [
-    ./hardware-configuration.nix    
-    ./../spolecne/cli.nix # Chcu tam mít svoje CLI utilitky
+    ./hardware/sborovy.nix
+    ./moduly/cli.nix # Chcu tam mít svoje CLI utilitky
   ];
 
-  # Bootloader.
-  boot.loader.systemd-boot.enable = true;
+  # TODO:
+  # - doplnit bootloader
+  
   # /tmp bude opravdu tmpfs RAMce
   boot.tmp.useTmpfs = true;
-  # K dispozici bude pouze aktuální generace
-  boot.loader.systemd-boot.configurationLimit = 1;
 
   # Síť
   networking.hostName = "sborovy";
@@ -45,12 +44,12 @@
 
   # Dané desktopové prostředí
   services.xserver.desktopManager.gnome.enable = true;
-  services.xserver.displayManager = {
-    gdm.enable = true;
+  services.xserver.displayManager.gdm.enable = true;
 
-    # Zapne autologin, aby se při zapnutí nemuselo zadávat heslo
-    autoLogin.enable = true;
-    autoLogin.user = "sborovy";
+  # Zapne autologin při zapnutí pod uživatelem prezetner
+  services.displayManager.autoLogin = {
+    enable = true;
+    user = "prezenter";
   };
 
   # Aby se při zapínání nezobrazovalo tty, ale rovnou desktopové prostředí
@@ -96,6 +95,13 @@
       workstation = true;
     };
   };
+  # bruh = builtins.trace inputs.ekkles.packages inputs.ekkles.packages;
+  environment.systemPackages = [
+    pkgs.firefox # Browser    
+    pkgs.vlc # Na přehrávání médií
+    inputs.ekkles.packages."x86_64-linux".default
+  ];
+
   
   # This value determines the NixOS release from which the default
   # settings for stateful data, like file locations and database versions
