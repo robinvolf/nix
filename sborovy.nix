@@ -7,9 +7,6 @@
     ./moduly/cli.nix # Chcu tam mít svoje CLI utilitky
   ];
 
-  # TODO:
-  # - doplnit bootloader
-  
   # /tmp bude opravdu tmpfs RAMce
   boot.tmp.useTmpfs = true;
 
