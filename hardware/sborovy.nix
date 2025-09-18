@@ -14,7 +14,7 @@
   boot.extraModulePackages = [ ];
 
   boot.loader.grub.enable = true;
-  boot.loader.grub.device = "ata-WDC_WD2500BEKT-75A25T0_WD-WXH1AB013732";
+  boot.loader.grub.device = "/dev/disk/by-id/ata-WDC_WD2500BEKT-75A25T0_WD-WXH1AB013732";
 
   fileSystems."/" =
     { device = "/dev/disk/by-uuid/f3329c48-ecdf-45a1-8a94-1a5d09726188";
