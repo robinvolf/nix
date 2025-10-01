@@ -23,5 +23,12 @@
         ./esta-laptop.nix
       ];
     };
+    nixosConfigurations.bazina = nixpkgs.lib.nixosSystem {
+      system = "x86_64-linux";
+      specialArgs = {inherit inputs; };
+      modules = [
+        ./bazina.nix
+      ];
+    };
   };
 }

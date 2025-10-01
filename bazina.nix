@@ -7,10 +7,10 @@
 {
   imports =
     [ # Include the results of the hardware scan.
-      ./bazina-hardware.nix
-      ./../../spolecne/cli.nix # CLI utilitky
-      ./../modules/ollama.nix # Lokální LLMka
-      # Nefunguje :( sice se připojím a mám obraz, ale okno na wotko se nespustí ./../modules/sunshine.nix # Lokálni cloud gaming
+      ./hardware/bazina.nix
+      ./moduly/cli.nix # CLI utilitky
+      ./moduly/ollama.nix # Lokální LLMka
+      # Sunshine Nefunguje :( sice se připojím a mám obraz, ale okno na wotko se nespustí
     ];
 
   # Zálohy
