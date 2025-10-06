@@ -59,7 +59,6 @@
     LC_TIME = "cs_CZ.UTF-8";
   };
 
-  # Define a user account. Don't forget to set a password with ‘passwd’.
   users.users.robin = {
     isNormalUser = true;
     description = "robin";
@@ -68,6 +67,9 @@
       "wheel" 
     ];
     hashedPassword = "$y$j9T$VfrRv.6AUivaF9xP/TQw4.$KkFRQaU0ghRlMG0O5a4FbQsv1StsvDTufMwNl4gXl31";
+    openssh.authorizedKeys.keys = [
+      "ecdsa-sha2-nistp256 AAAAE2VjZHNhLXNoYTItbmlzdHAyNTYAAAAIbmlzdHAyNTYAAABBBIQYzKYSgupG/+DqyyuckdvyiXHE18hHdYI8PsI2Mq/l3IurBsDEkifkHRdDEBW35fIclxfPzuIjrNVh2YnFBFA= robin@t14-laptop"
+    ];
   };
 
   # Allow unfree packages
@@ -85,7 +87,14 @@
   environment.variables.EDITOR = "hx";
 
   # SSH
-  services.openssh.enable = true;
+  services.openssh = {
+    enable = true;
+    settings = {
+      PasswordAuthentication = false;
+      KbdInteractiveAuthentication = false;
+      PermitRootLogin = "no";
+    };
+  };
 
   # Avahi
   services.avahi = {
