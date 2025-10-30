@@ -3,7 +3,8 @@
 {
   # HW konfigurace
   imports = [
-    ./hardware-configuration.nix    
+    ./hardware/esta-laptop.nix
+    ./moduly/cli.nix
   ];
 
   # Bootloader.
@@ -49,66 +50,17 @@
     hunspellDicts.cs_CZ
     hunspellDicts.en_GB-ise
 
-    git    # Git!!!!
-    fish   # Můj oblíbený shell
-    helix  # Textový editor
-    zellij # Terminálový multiplexor + integrovaný "screen"
-
-    # Náhrady klasických příkazů
-    eza     # Lepší ls
-    dust    # Lepší du
-    rip2    # Lepší rm
-    zoxide  # Lepší cd
-    delta   # Lepší diff
-    bat     # Lepší cat
-    ripgrep # Lepší grep
-    bottom  # Lepší (h)top
-    fd      # Lepší find
-
-    # Internet
-    curl          # CLI stahovač z internetu
-    yt-dlp        # Stahovač YT videí
-    speedtest-cli # Klient pro měření rychlosti internetového připojení
-    openvpn       # Pro VPNku
-    rsync         # Přenos souborů
-    bandwhich     # Vypíše využití sítě podle adres/procesů
-
-    # Hardware
-    smartmontools         # Nástroje pro S.M.A.R.T monitoring disků
-    hwinfo                # Řekne info o HW
-    android-file-transfer # MTP souborový systém pro přenášení souborů z/do android telefonu
-    dmidecode             # Umí dekódovat, jaký má počítač HW podle SMBIOS/DMI standartu
-
-    # Manuály
-    man      # Prohlížeč manuálových stránek
-    manix    # Prohlížeč offline dokumentace Nixu
-    tealdeer # Jednodušší "manuálové stránky"
-
-    # Utilitky
-    file                 # Co je to za typ souboru?
-    ouch                 # Utilitka pro práci s archivy a kompresí (tar, zip, ...)
-    fend                 # Kalkulačka
-    sshfs                # Souborový systém přes ssh
-    taskwarrior3         # Seznam pro TODOčka
-    just                 # Takový jednoduchý command runner, lepší než kopa shell skriptů
-    skim                 # Fuzzy finder
-    which                # Řekne umístění spustitelného souboru
-    watchexec            # Spouští příkazy při modifikaci souboru
-    lsof                 # Vypíše otevřené soubory
-    tokei                # Spočítá řádky kódu
-    brightnessctl        # Ovládání jasu obrazovky
-    ffmpeg               # Audio-video manipulace
     nvtopPackages.intel  # Monitorování GPU (Intel)
   ];
 
   # Dané desktopové prostředí
   services.xserver.desktopManager.gnome.enable = true;
-  services.xserver.displayManager = {
-    gdm.enable = true;
+  services.xserver.displayManager.gdm.enable = true;
 
-    # Zapne autologin, aby nemusela zadávat heslo
-    autoLogin.enable = true;
-    autoLogin.user = "ester";
+  # Zapne autologin, aby nemusela zadávat heslo
+  services.displayManager.autoLogin = {
+    enable = true;
+    user = "ester";
   };
 
   # Aby se při zapínání nezobrazovalo tty, ale rovnou desktopové prostředí
@@ -133,12 +85,13 @@
       "ecdsa-sha2-nistp256 AAAAE2VjZHNhLXNoYTItbmlzdHAyNTYAAAAIbmlzdHAyNTYAAABBBIQYzKYSgupG/+DqyyuckdvyiXHE18hHdYI8PsI2Mq/l3IurBsDEkifkHRdDEBW35fIclxfPzuIjrNVh2YnFBFA= robin@t14-laptop"
     ];
   };
-  # Musí být, aby fungoval shell pro uživatele robin
-  programs.fish.enable = true;
+
   # SSH a Avahi, abych se mohl připojovat na počítač pro údržbu
   services.openssh = {
     enable = true;
-    settings.PermitRootLogin = "without-password";
+    settings.PermitRootLogin = "prohibit-password";
+    # Nebudeme pokoušet, nepůjde se přihlásit přes heslo
+    settings.PasswordAuthentication = false;
   };
   services.avahi = {
     enable = true;
