@@ -95,11 +95,32 @@
   };
   services.avahi = {
     enable = true;
+
+    # Pro tisk
+    nssmdns4 = true;
+    openFirewall = true;
+
     publish = {
       enable = true;
       addresses = true;
       workstation = true;
     };
+  };
+
+  # Tiskárny
+  services.printing.enable = true;
+
+  hardware.printers = {
+    ensurePrinters = [
+      {
+        name = "Brother-DCP-9020CDW";
+        location = "Ve skříni";
+        deviceUri = "dnssd://Brother%20DCP-9020CDW._ipp._tcp.local/?uuid=e3248000-80ce-11db-8000-30055c4d1724";
+        model = "drv:///sample.drv/generic.ppd";
+      }
+    ];
+
+    ensureDefaultPrinter = "Brother-DCP-9020CDW";
   };
   
   # This value determines the NixOS release from which the default
