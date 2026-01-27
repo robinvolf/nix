@@ -4,7 +4,7 @@
   inputs = {
     nixpkgs.url = "github:NixOS/nixpkgs/nixos-25.05";
 
-    ekkles.url = "github:robinvolf/ekkles/master";
+    ekkles.url = "github:robinvolf/ekkles/v26.01";
     ekkles.inputs.nixpkgs.follows = "nixpkgs";
 };
 
