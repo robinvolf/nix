@@ -28,5 +28,12 @@
         ./bazina.nix
       ];
     };
+    nixosConfigurations.t14-laptop = nixpkgs.lib.nixosSystem {
+      system = "x86_64-linux";
+      specialArgs = {inherit inputs; };
+      modules = [
+        ./t14-laptop.nix
+      ];
+    };
   };
 }
