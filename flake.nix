@@ -2,11 +2,9 @@
   description = "Nix konfigurace všech systému, které spravuji";
 
   inputs = {
-    nixpkgs.url = "github:NixOS/nixpkgs/nixos-25.05";
-
+    nixpkgs.url = "github:NixOS/nixpkgs/nixos-25.11";
     ekkles.url = "github:robinvolf/ekkles/v26.01";
-    ekkles.inputs.nixpkgs.follows = "nixpkgs";
-};
+  };
 
   outputs = {self, nixpkgs, ...}@inputs : {
     nixosConfigurations.sborovy = nixpkgs.lib.nixosSystem {

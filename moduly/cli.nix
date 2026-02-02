@@ -1,60 +1,73 @@
 # Všechny CLI utilitky, které používám
 
-{pkgs, ...}:{
+{pkgs, ...}:
+let 
   # Základ
-  programs.git.enable = true;
+  programs.git.enable = true; # Git
   programs.fish.enable = true; # Můj oblíbený shell
-  environment.systemPackages = [pkgs.helix]; # Textový editor
-  environment.systemPackages = [pkgs.zellij]; # Terminálový multiplexor + integrovaný "screen"
+  basic = with pkgs; [
+    helix # Textový editor
+    zellij # Terminálový multiplexor + integrovaný "screen"
+  ];
 
   # Náhrady klasických příkazů
-  environment.systemPackages = [pkgs.eza]; # Lepší ls
-  environment.systemPackages = [pkgs.dust]; # Lepší du
-  environment.systemPackages = [pkgs.rip2]; # Lepší rm
-  programs.zoxide.enable = true;
-  environment.systemPackages = [pkgs.delta]; # Lepší diff
-  programs.bat.enable = true;
-  environment.systemPackages = [pkgs.ripgrep-all]; # Lepší grep, který umí hledat i v netextových souborech (pdf, docx, sqlite, ...)
-  environment.systemPackages = [pkgs.bottom]; # Lepší (h)top
-  environment.systemPackages = [pkgs.fd]; # Lepší find
+  programs.zoxide.enable = true; # Lepší cd
+  programs.bat.enable = true; # Lepší cat
+  classicSubstitutes = with pkgs; [
+    eza # Lepší ls
+    dust # Lepší du
+    rip2 # Lepší rm
+    delta # Lepší diff
+    ripgrep-all # Lepší grep, který umí hledat i v netextových souborech (pdf, docx, sqlite, ...)
+    bottom # Lepší (h)top
+    fd # Lepší find
+  ];
 
-  
   # Internet
-  environment.systemPackages = [pkgs.curl]; # CLI stahovač z internetu
-  environment.systemPackages = [pkgs.yt-dlp];        # Stahovač YT videí
-  environment.systemPackages = [pkgs.speedtest-cli]; # Klient pro měření rychlosti internetového připojení
   programs.openvpn3.enable = true;       # Pro VPNku
-  environment.systemPackages = [pkgs.rsync];         # Přenos souborů
-  environment.systemPackages = [pkgs.bandwhich];     # Vypíše využití sítě podle adres/procesů
+  internet = with pkgs; [
+    pkgs.curl # CLI stahovač z internetu
+    pkgs.yt-dlp        # Stahovač YT videí
+    pkgs.speedtest-cli # Klient pro měření rychlosti internetového připojení
+    pkgs.rsync         # Přenos souborů
+    pkgs.bandwhich     # Vypíše využití sítě podle adres/procesů
+  ];
 
   # Hardware
-  environment.systemPackages = [pkgs.smartmontools];         # Nástroje pro S.M.A.R.T monitoring disků
-  environment.systemPackages = [pkgs.hwinfo];                # Řekne info o HW
-  environment.systemPackages = [pkgs.android-file-transfer]; # MTP souborový systém pro přenášení souborů z/do android telefonu
-  environment.systemPackages = [pkgs.dmidecode];             # Umí dekódovat, jaký má počítač HW podle SMBIOS/DMI standartu
+  hardware = with pkgs; [
+    smartmontools         # Nástroje pro S.M.A.R.T monitoring disků
+    hwinfo                # Řekne info o HW
+    android-file-transfer # MTP souborový systém pro přenášení souborů z/do android telefonu
+    dmidecode             # Umí dekódovat, jaký má počítač HW podle SMBIOS/DMI standartu
+  ];
 
   # Manuálové stránky
   documentation = {
     nixos.enable = true; # Zahrne manuálové stránky pro NixOS
     dev.enable = true; # Zahrne manuálové stránky pro vývoj
     man = {
-      enable = true
+      enable = true;
       generateCaches = true; # Kešuje indexaci manuálových stránek, aby se v ní dalo hledat
     };
   };
-  environment.systemPackages = [pkgs.tealdeer]; # Výcuc manuálových stránek
+  manuals = [pkgs.tealdeer]; # Výcuc manuálových stránek
 
-  # Rozličné utilitky
-  environment.systemPackages = [pkgs.file];                 # Co je to za typ souboru?
-  environment.systemPackages = [pkgs.ouch];                 # Utilitka pro práci s archivy a kompresí (tar, zip, ...)
-  environment.systemPackages = [pkgs.fend];                 # Kalkulačka
-  environment.systemPackages = [pkgs.sshfs];                # Souborový systém přes ssh
-  environment.systemPackages = [pkgs.taskwarrior3];         # Seznam pro TODOčka
-  environment.systemPackages = [pkgs.just];                 # Takový jednoduchý command runner, lepší než kopa shell skriptů
-  programs.skim.enable = true                 # Fuzzy finder
-  environment.systemPackages = [pkgs.which];                # Řekne umístění spustitelného souboru
-  environment.systemPackages = [pkgs.watchexec];            # Spouští příkazy při modifikaci souboru
-  environment.systemPackages = [pkgs.lsof];                 # Vypíše otevřené soubory
-  environment.systemPackages = [pkgs.tokei];                # Spočítá řádky kódu
-  environment.systemPackages = [pkgs.ffmpeg-headless];               # Audio-video manipulace
+  # Utilitky
+  programs.skim.enable = true;                 # Fuzzy finder
+  utilities = with pkgs; [
+    file                 # Co je to za typ souboru?
+    ouch                 # Utilitka pro práci s archivy a kompresí (tar, zip, ...)
+    fend                 # Kalkulačka
+    sshfs                # Souborový systém přes ssh
+    taskwarrior3         # Seznam pro TODOčka
+    just                 # Takový jednoduchý command runner, lepší než kopa shell skriptů
+    which                # Řekne umístění spustitelného souboru
+    watchexec            # Spouští příkazy při modifikaci souboru
+    lsof                 # Vypíše otevřené soubory
+    tokei                # Spočítá řádky kódu
+    ffmpeg-headless               # Audio-video manipulace
+  ];
+in {
+  inherit programs;
+  environment.systemPackages = basic ++ classicSubstitutes ++ internet ++ hardware ++ manuals ++ utilities;
 }
