@@ -5,6 +5,7 @@
       ./moduly/cli.nix # CLI utilitky
       ./moduly/robin.nix
       ./moduly/vm_test.nix
+      ./moduly/gui_programy.nix
     ];
 
   # Nix konfigurace
@@ -58,11 +59,9 @@
     };
   };
 
-  programs.firefox.enable = true;
-
+  # Věci na hry
   environment.systemPackages = with pkgs; [
     lutris # Na gri
-    alacritty-graphics # Terminálový emulátor
     inputs.prismlauncher.packages."x86_64-linux".prismlauncher # Cracknutý minecraft launcher
   ];
 

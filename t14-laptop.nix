@@ -1,24 +1,10 @@
-{ config, pkgs, inputs, ... }:
-
-let
-  guiPrograms = with pkgs; [
-    alacritty-graphics # Fork alacritty s podporou grafických protokolů pro obrázky v terminálu
-    zathuraPkgs.zathura_core # Prohlížeč PDFek (jen program)
-    zathuraPkgs.zathura_pdf_mupdf # Plugin pro PDFka pro zathuru
-    imv # Prohlížeč obrázků
-    bibletime # Program na čtení Bible
-    legcord # Discord klient
-    rnote # Kreslení, poznámky
-    mpv # Přehrávání videí
-    mpvScripts.quality-menu # Výběr kvality pro youtube videa přes mpv
-  ];
-in
-{
+{ config, pkgs, inputs, ... }:{
   imports = [
     # Moje drahocenné CLI nástroje
     ./moduly/cli.nix
     ./moduly/robin.nix
     ./moduly/vm_test.nix
+    ./moduly/gui_programy.nix
   ];
 
   # Zapne flakes
@@ -89,12 +75,6 @@ in
       };
     };
   };
-
-
-  # GUI Programy
-  programs.firefox.enable = true;
-
-  environment.systemPackages = guiPrograms;
 
   services.avahi = {
     enable = true;
