@@ -1,14 +1,9 @@
-# Edit this configuration file to define what should be installed on
-# your system.  Help is available in the configuration.nix(5) man page
-# and in the NixOS manual (accessible by running ‘nixos-help’).
-
-{ config, pkgs, inputs, ... }:
-
-{
+{ config, pkgs, inputs, ... }:{
   imports =
     [
       ./hardware.nix
       ./moduly/cli.nix # CLI utilitky
+      ./moduly/robin.nix
     ];
 
   # Když použijeme tuto konfiguraci ve virtuálce
@@ -19,14 +14,19 @@
     };
   };
 
+  # Nix konfigurace
+  # Povolit nesvobodné balíčky
+  nixpkgs.config.allowUnfree = true;
+  # Povolit funkci Flakes a nové rozhraní CLI nástroje nix
+  nix.settings.experimental-features = [ "nix-command" "flakes" ];
+
   # Bootloader.
   boot.loader.systemd-boot.enable = true;
   boot.tmp.useTmpfs = true;
 
-  networking.hostName = "bazina";
-
-  # Enable networking
+  # Síť
   networking.networkmanager.enable = true;
+  networking.hostName = "bazina";
 
   # Set your time zone.
   time.timeZone = "Europe/Prague";
@@ -43,25 +43,6 @@
     LC_TIME = "cs_CZ.UTF-8";
   };
 
-  users.users.robin = {
-    isNormalUser = true;
-    description = "robin";
-    extraGroups = [
-      "networkmanager"
-      "wheel" 
-    ];
-    hashedPassword = "$y$j9T$VfrRv.6AUivaF9xP/TQw4.$KkFRQaU0ghRlMG0O5a4FbQsv1StsvDTufMwNl4gXl31";
-    openssh.authorizedKeys.keys = [
-      "ecdsa-sha2-nistp256 AAAAE2VjZHNhLXNoYTItbmlzdHAyNTYAAAAIbmlzdHAyNTYAAABBBIQYzKYSgupG/+DqyyuckdvyiXHE18hHdYI8PsI2Mq/l3IurBsDEkifkHRdDEBW35fIclxfPzuIjrNVh2YnFBFA= robin@t14-laptop"
-    ];
-  };
-
-  # Allow unfree packages
-  nixpkgs.config.allowUnfree = true;
-
-  # Enable the Flakes feature and the accompanying new nix command-line tool
-  nix.settings.experimental-features = [ "nix-command" "flakes" ];
-
   environment.variables.EDITOR = "hx";
 
   # SSH
@@ -77,8 +58,6 @@
   # Avahi
   services.avahi = {
     enable = true;
-    # nssmdns4 = true;
-    # nssmdns6 = true;
     publish = {
       enable = true;
       addresses = true;
@@ -104,12 +83,6 @@
     cosmic-reader
     cosmic-player
   ];
-
-  # Open ports in the firewall.
-  # networking.firewall.allowedTCPPorts = [ ... ];
-  # networking.firewall.allowedUDPPorts = [ ... ];
-  # Or disable the firewall altogether.
-  # networking.firewall.enable = false;
 
   # This value determines the NixOS release from which the default
   # settings for stateful data, like file locations and database versions

@@ -17,6 +17,7 @@ in
   imports = [
     # Moje drahocenné CLI nástroje
     ./moduly/cli.nix
+    ./moduly/robin.nix
   ];
 
   # Zapne flakes
@@ -52,17 +53,6 @@ in
     LC_PAPER = "cs_CZ.UTF-8";
     LC_TELEPHONE = "cs_CZ.UTF-8";
     LC_TIME = "cs_CZ.UTF-8";
-  };
-
-  users.users.robin = {
-    isNormalUser = true;
-    description = "Robin";
-    extraGroups = [
-      "networkmanager"
-      "wheel"
-    ];
-    hashedPassword = "$y$j9T$CXo6N5TREXTi.QLsqIJ8G/$JOIvMeKRSluiwlVGStmvTNsTNneO37bSQDFCt9cd8Z8";
-    shell = pkgs.fish;
   };
 
   # Desktopové Prostředí
