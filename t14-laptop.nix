@@ -88,11 +88,13 @@
   };
 
   # Display Manager
-  services.greetd = {
+  services.greetd = let
+    greetMsg = "hello";
+  in {
     enable = true;
     settings = {
       default_session = {
-        command = "${pkgs.tuigreet}/bin/tuigreet --remember --remember-user-session --asterisks --time --greeting "" --cmd ${pkgs.fish}";
+        command = "${pkgs.tuigreet}/bin/tuigreet --remember --remember-user-session --asterisks --time --greeting \"hello\" --cmd ${pkgs.fish}";
         user = "greeter";
       };
     };
@@ -110,6 +112,30 @@
       }
     ];
     ensureDefaultPrinter = "Brother-DCP-9020CDW";
+  };
+
+  # Keyd, démon modifikace vstupu na úrovni kernelu
+  services.keyd = {
+    enable = true;  
+
+    # Matchne to ID tátovy klávesnice
+    # Normálně je klávesa Pause zaměněna za →
+    # Pokud je stisknuto Shift+Pause, udělá to pouze Pause
+    keyboards."tatova_klavesnice" = {
+      ids = [
+        "258a:001f:fcfe2b1f"
+        "258a:001f:ab99cdb6 "
+        "258a:001f:92611046"
+      ];
+      settings = {
+        main = {
+          pause = "right";
+        };
+        shift = {
+          pause = "pause";
+        };
+      };
+    };
   };
   
   # This value determines the NixOS release from which the default
