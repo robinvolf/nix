@@ -8,6 +8,7 @@
     imv # Prohlížeč obrázků
     bibletime # Program na čtení Bible
     legcord # Discord klient
+    freetube # Frontend pro YouTube
     rnote # Kreslení, poznámky
     mpv # Přehrávání videí
     mpvScripts.quality-menu # Výběr kvality pro youtube videa přes mpv
