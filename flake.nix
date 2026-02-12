@@ -4,6 +4,7 @@
   inputs = {
     nixpkgs.url = "github:NixOS/nixpkgs/nixos-25.11";
     ekkles.url = "github:robinvolf/ekkles/v26.01";
+    prismlauncher.url = "github:Diegiwg/PrismLauncher-Cracked/10.0.2";
   };
 
   outputs = {self, nixpkgs, ...}@inputs : {
