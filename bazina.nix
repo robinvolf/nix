@@ -6,31 +6,18 @@
 
 {
   imports =
-    [ # Include the results of the hardware scan.
-      ./hardware/bazina.nix
+    [
+      ./hardware.nix
       ./moduly/cli.nix # CLI utilitky
-      ./moduly/ollama.nix # Lokální LLMka
-      # Sunshine Nefunguje :( sice se připojím a mám obraz, ale okno na wotko se nespustí
     ];
 
-  # Zálohy
-  users.users.backup = {
-    # Bez hesla, nedá se přihlásit heslem
-    isSystemUser = true; # Systémový uživatel, bude mít UID < 1000
-    createHome = true;
-    home = "/home/backup";
-    description = "Účet pro zálohu dat";
-    group = "backup";
-    shell = pkgs.bashNonInteractive;
-    openssh.authorizedKeys.keys = [
-      "ecdsa-sha2-nistp256 AAAAE2VjZHNhLXNoYTItbmlzdHAyNTYAAAAIbmlzdHAyNTYAAABBBIQYzKYSgupG/+DqyyuckdvyiXHE18hHdYI8PsI2Mq/l3IurBsDEkifkHRdDEBW35fIclxfPzuIjrNVh2YnFBFA= robin@t14-laptop"
-    ];
+  # Když použijeme tuto konfiguraci ve virtuálce
+  virtualisation.vmVariant = {
+    virtualisation = {
+      cores = 4; # Výchozí 1 jádro je nepoužitelné pro moderní systém
+      memorySize = 4096; # 4096 MiB RAM
+    };
   };
-  # Vytvoří skupinu backup pro uživatele na zálohy a pro mě
-  users.groups.backup.members = [
-    "backup"
-    "robin"
-  ];
 
   # Bootloader.
   boot.loader.systemd-boot.enable = true;
@@ -43,10 +30,7 @@
 
   # Set your time zone.
   time.timeZone = "Europe/Prague";
-
-  # Select internationalisation properties.
-  i18n.defaultLocale = "en_US.UTF-8";
-
+  i18n.defaultLocale = "cs_CZ.UTF-8";
   i18n.extraLocaleSettings = {
     LC_ADDRESS = "cs_CZ.UTF-8";
     LC_IDENTIFICATION = "cs_CZ.UTF-8";
@@ -78,12 +62,6 @@
   # Enable the Flakes feature and the accompanying new nix command-line tool
   nix.settings.experimental-features = [ "nix-command" "flakes" ];
 
-  # Celosystémové balíčky
-  environment.systemPackages = with pkgs; [
-    avahi
-    ffmpeg
-  ];
-
   environment.variables.EDITOR = "hx";
 
   # SSH
@@ -107,6 +85,25 @@
       workstation = true;
     };
   };
+
+  programs.firefox.enable = true;
+
+  environment.systemPackages = with pkgs; [
+    lutris # Na gri
+    alacritty-graphics # Terminálový emulátor
+    inputs.prismlauncher.packages."x86_64-linux".prismlauncher # Cracknutý minecraft launcher
+  ];
+
+  # Desktopové prostředí
+  services.displayManager.cosmic-greeter.enable = true;
+  services.desktopManager.cosmic.enable = true;
+
+  environment.cosmic.excludePackages = with pkgs; [
+    cosmic-edit
+    cosmic-store
+    cosmic-reader
+    cosmic-player
+  ];
 
   # Open ports in the firewall.
   # networking.firewall.allowedTCPPorts = [ ... ];
