@@ -87,6 +87,17 @@
     };
   };
 
+  # Display Manager
+  services.greetd = {
+    enable = true;
+    settings = {
+      default_session = {
+        command = "${pkgs.tuigreet}/bin/tuigreet --remember --remember-user-session --asterisks --time --greeting "" --cmd ${pkgs.fish}";
+        user = "greeter";
+      };
+    };
+  };
+
   # Tiskárny
   services.printing.enable = true;
   hardware.printers = {
