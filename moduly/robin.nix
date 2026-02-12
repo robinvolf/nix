@@ -1,6 +1,6 @@
 # Můj uživatelský účet
 
-{pkgs, ...}:
+{pkgs, ...}:{
   users.users.robin = {
     isNormalUser = true;
     description = "Robin Volf";

@@ -18,19 +18,11 @@ in
     # Moje drahocenné CLI nástroje
     ./moduly/cli.nix
     ./moduly/robin.nix
+    ./moduly/vm_test.nix
   ];
 
   # Zapne flakes
   nix.settings.experimental-features = [ "nix-command" "flakes" ];
-
-  # Když použijeme tuto konfiguraci ve virtuálce
-  virtualisation.vmVariant = {
-    virtualisation = {
-      cores = 4; # Výchozí 1 jádro je nepoužitelné pro moderní systém
-      memorySize = 4096; # 4096 MiB RAM
-    };
-    services.spice-vdagentd.enable = true; # Sdílení clipboardu
-  };
 
   # Bootloader.
   # boot.loader.systemd-boot.enable = true;

@@ -1,18 +1,11 @@
 { config, pkgs, inputs, ... }:{
   imports =
     [
-      ./hardware.nix
+      # ./hardware.nix
       ./moduly/cli.nix # CLI utilitky
       ./moduly/robin.nix
+      ./moduly/vm_test.nix
     ];
-
-  # Když použijeme tuto konfiguraci ve virtuálce
-  virtualisation.vmVariant = {
-    virtualisation = {
-      cores = 4; # Výchozí 1 jádro je nepoužitelné pro moderní systém
-      memorySize = 4096; # 4096 MiB RAM
-    };
-  };
 
   # Nix konfigurace
   # Povolit nesvobodné balíčky
