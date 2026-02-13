@@ -3,7 +3,7 @@
 {
   # HW konfigurace
   imports = [
-    ./hardware/esta-laptop.nix
+    ./hardware.nix
     ./moduly/cli.nix
   ];
 
@@ -51,6 +51,7 @@
     hunspellDicts.en_GB-ise
 
     nvtopPackages.intel  # Monitorování GPU (Intel)
+    inputs.prismlauncher.packages."x86_64-linux".prismlauncher # Cracknutý minecraft launcher
   ];
 
   # Dané desktopové prostředí
