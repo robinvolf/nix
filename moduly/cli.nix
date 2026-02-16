@@ -58,6 +58,7 @@ let
     file                 # Co je to za typ souboru?
     ouch                 # Utilitka pro práci s archivy a kompresí (tar, zip, ...)
     fend                 # Kalkulačka
+    openssh              # Pro klientské SSH nástroje
     sshfs                # Souborový systém přes ssh
     taskwarrior3         # Seznam pro TODOčka
     just                 # Takový jednoduchý command runner, lepší než kopa shell skriptů
