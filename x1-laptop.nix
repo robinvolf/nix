@@ -37,15 +37,13 @@
   };
 
   # Desktopové prostředí cosmic
-  services.desktopManager.cosmic = {
-    enable = true;  
-    excludePackages = with pkgs; [
-      cosmic-edit
-      cosmic-store
-      cosmic-reader
-      cosmic-player
-    ];
-  };
+  services.desktopManager.cosmic.enable = true;  
+  environment.cosmic.excludePackages = with pkgs; [
+    cosmic-edit
+    cosmic-store
+    cosmic-reader
+    cosmic-player
+  ];
 
   services.avahi = {
     enable = true;
