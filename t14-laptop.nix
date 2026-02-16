@@ -13,11 +13,12 @@
   nix.settings.experimental-features = [ "nix-command" "flakes" ];
 
   # Bootloader.
-  # boot.loader.systemd-boot.enable = true;
-  # boot.tmp.useTmpfs = true;
+  boot.loader.systemd-boot.enable = true;
+  boot.tmp.useTmpfs = true;
+  boot.loader.efi.canTouchEfiVariables = true;
 
   # Síť
-  networking.hostName = "t14-laptop";
+  networking.hostName = "x1-laptop";
   networking.networkmanager.enable = true;
 
   # Internacionalizace
@@ -35,47 +36,15 @@
     LC_TIME = "cs_CZ.UTF-8";
   };
 
-  # Desktopové Prostředí
-  programs.sway = {
-    enable = true;
-    extraPackages = with pkgs; [
-      brightnessctl # Ovládání jasu obrazovky
-      i3status-rust # Generátor obsahu statusové řádky
-      dunst # Notifikace
-      swaylock # Zámek obrazovky
-      swayidle # Zamknutí po nečinnosti/při uspání
-      sway-contrib.grimshot # Screenshoty
-      wlsunset # Filtr modrého světla
-      bemenu # Startovač aplikací
-      wl-clipboard-rs # Pro clipboard
-      cliphist # Historie clipboardu
-      wev # Testování vstupu
+  # Desktopové prostředí cosmic
+  services.desktopManager.cosmic = {
+    enable = true;  
+    excludePackages = with pkgs; [
+      cosmic-edit
+      cosmic-store
+      cosmic-reader
+      cosmic-player
     ];
-  };
-
-  # Audio
-  security.rtkit.enable = true; # Umožňuje pipewire vyžádat si real-time scheduling prioritu
-  services.pipewire = {
-    enable = true;
-    alsa.enable = true;
-    alsa.support32Bit = true;
-    pulse.enable = true;
-  };  
-  hardware.bluetooth = {
-    enable = true;
-    powerOnBoot = true;
-    settings = {
-      General = {
-        # Shows battery charge of connected devices on supported Bluetooth adapters. Defaults to 'false'.
-        Experimental = true;
-      };
-      Policy = {
-        # Enable all controllers when they are found. This includes
-        # adapters present on start as well as adapters that are plugged
-        # in later on. Defaults to 'true'.
-        AutoEnable = true;
-      };
-    };
   };
 
   services.avahi = {
@@ -91,12 +60,12 @@
 
   # Display Manager
   services.greetd = let
-    greetMsg = "hello";
+    greetMsg = "Vítej cizinče";
   in {
     enable = true;
     settings = {
       default_session = {
-        command = "${pkgs.tuigreet}/bin/tuigreet --remember --remember-user-session --asterisks --time --greeting \"hello\" --cmd ${pkgs.fish}";
+        command = "${pkgs.tuigreet}/bin/tuigreet --remember --remember-user-session --asterisks --time --greeting ${greetMsg} --cmd ${pkgs.fish}";
         user = "greeter";
       };
     };

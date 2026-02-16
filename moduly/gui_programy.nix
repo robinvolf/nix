@@ -9,6 +9,7 @@
     bibletime # Program na čtení Bible
     legcord # Discord klient
     freetube # Frontend pro YouTube
+    signal-desktop # Kecátko
     rnote # Kreslení, poznámky
     mpv # Přehrávání videí
     mpvScripts.quality-menu # Výběr kvality pro youtube videa přes mpv
