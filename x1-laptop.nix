@@ -80,8 +80,9 @@
   environment.sessionVariables = {
     LIBVA_DRIVER_NAME = "i965";     # Prefer the modern iHD backend
   };
-  # hardware.enableRedistributableFirmware = true;
-  # boot.kernelParams = [ "i915.enable_guc=3" ];
+
+  services.logind.settings.Login.HandlePowerKey = "hibernate";
+  services.logind.settings.Login.HandlePowerKeyLongPress = "poweroff";
 
   # Tiskárny
   services.printing.enable = true;
