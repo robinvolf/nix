@@ -69,6 +69,20 @@
     };
   };
 
+  # HW dekódované video
+  hardware.graphics = {
+    enable = true;
+    extraPackages = with pkgs; [
+      # Required for modern Intel GPUs (Xe iGPU and ARC)
+      intel-vaapi-driver # For older processors. LIBVA_DRIVER_NAME=i965
+    ];
+  };
+  environment.sessionVariables = {
+    LIBVA_DRIVER_NAME = "i965";     # Prefer the modern iHD backend
+  };
+  # hardware.enableRedistributableFirmware = true;
+  # boot.kernelParams = [ "i915.enable_guc=3" ];
+
   # Tiskárny
   services.printing.enable = true;
   hardware.printers = {
