@@ -21,5 +21,19 @@
         };
       };
     };
+
+    # Na klávesnici na x1 noťasu má end na místě capslocku
+    # takto se při stisknutí endu vytvoří stick meta + space,
+    # což je často zkratka na změnu rozložení klávesnice.
+    keyboards."x1_zmena_rozlozeni" = {
+      ids = [
+        "0001:0001:70533846"
+      ];
+      settings = {
+        main = {
+          end = "macro(leftmeta+space)";
+        };
+      };
+    };
   };
 }
