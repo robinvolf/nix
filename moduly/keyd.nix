@@ -15,6 +15,7 @@
       settings = {
         main = {
           pause = "right";
+          capslock = "macro(leftmeta+space)";
         };
         shift = {
           pause = "pause";
@@ -32,6 +33,18 @@
       settings = {
         main = {
           end = "macro(leftmeta+space)";
+        };
+      };
+    };
+
+    # Cursed proste
+    keyboards."capslock_zmena_rozlozeni" = {
+      ids = [
+        "*"
+      ];
+      settings = {
+        main = {
+          capslock = "macro(leftmeta+space)";
         };
       };
     };
