@@ -66,7 +66,8 @@ let
     watchexec            # Spouští příkazy při modifikaci souboru
     lsof                 # Vypíše otevřené soubory
     tokei                # Spočítá řádky kódu
-    ffmpeg-headless               # Audio-video manipulace
+    ffmpeg-headless      # Audio-video manipulace
+    translate-shell      # CLI překladač
   ];
 in {
   inherit programs;
