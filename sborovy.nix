@@ -3,7 +3,7 @@
 {
   # HW konfigurace
   imports = [
-    ./hardware/sborovy.nix
+    ./hardware.nix
     ./moduly/cli.nix # Chcu tam mít svoje CLI utilitky
   ];
 
