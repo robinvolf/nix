@@ -91,6 +91,18 @@
     ensureDefaultPrinter = "Brother-DCP-9020CDW";
   };
 
+  # Sice nejsu server, ale schopnost připojit se vzdáleně je velmi užitečná
+  services.openssh = {
+    enable = true;
+    settings = {
+      PermitRootLogin = false;
+      AllowUsers = [ # Lze se připojit pouze jako uživatel robin
+        "robin"  
+      ];
+      PasswordAuthentication = false;
+    };
+  };
+
   # This value determines the NixOS release from which the default
   # settings for stateful data, like file locations and database versions
   # on your system were taken. It‘s perfectly fine and recommended to leave
