@@ -74,4 +74,6 @@ let
 in {
   inherit programs;
   environment.systemPackages = basic ++ classicSubstitutes ++ internet ++ hardware ++ manuals ++ utilities;
+
+  console.font = "LatArCyrHeb-16";
 }
