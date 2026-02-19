@@ -3,8 +3,7 @@
 
   environment.systemPackages = with pkgs; [
     alacritty-graphics # Fork alacritty s podporou grafických protokolů pro obrázky v terminálu
-    zathuraPkgs.zathura_core # Prohlížeč PDFek (jen program)
-    zathuraPkgs.zathura_pdf_mupdf # Plugin pro PDFka pro zathuru
+    zathura # Prohlížeč PDFek/EPUB/...
     imv # Prohlížeč obrázků
     bibletime # Program na čtení Bible
     legcord # Discord klient
