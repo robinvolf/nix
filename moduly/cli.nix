@@ -68,6 +68,8 @@ let
     tokei                # Spočítá řádky kódu
     ffmpeg-headless      # Audio-video manipulace
     translate-shell      # CLI překladač
+    typst                # Sázecí nástroj, nástupce Latexu
+    tinymist             # LSP server pro typst
   ];
 in {
   inherit programs;
