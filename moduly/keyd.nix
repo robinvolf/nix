@@ -23,17 +23,22 @@
       };
     };
 
-    # Na klávesnici na x1 noťasu má end na místě capslocku
-    # takto se při stisknutí endu vytvoří stick meta + space,
-    # což je často zkratka na změnu rozložení klávesnice.
-    keyboards."x1_zmena_rozlozeni" = {
+    # Thinkpady maji stejne id klavesnice, ja si tu remapnu
+    # capslock na meta+space (cimz se meni rozlozeni klavesnice)
+    # Na klávesnici na x1 noťasu má end na místě capslocku,
+    # tak ho premapuju taky a shift+end bude normalni end
+    keyboards."thinkpad" = {
       ids = [
         "0001:0001:70533846"
       ];
       settings = {
         main = {
+          capslock = "macro(leftmeta+space)";
           end = "macro(leftmeta+space)";
         };
+        shift = {
+          end = "end";
+        }
       };
     };
 
