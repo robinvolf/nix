@@ -77,7 +77,7 @@ in {
 
   console.font = "LatArCyrHeb-16";
 
-  environment.veriables = [
-    EDITOR = "hx";  
-  ];
+  environment.variables = {
+    EDITOR = "hx";
+  };
 }
