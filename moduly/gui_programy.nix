@@ -12,7 +12,8 @@
     rnote # Kreslení, poznámky
     mpv # Přehrávání videí
     mpvScripts.quality-menu # Výběr kvality pro youtube videa přes mpv
-    wf-recorder # Jednoduché CLI nahrávání obrazovky
     songrec # Shazam klient (poznávání skladby ze zvuku)
+    libreoffice
+    kooha # Nahrávání obrazovky
   ];
 }
