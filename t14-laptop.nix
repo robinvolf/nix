@@ -22,9 +22,14 @@
     "zswap.shrinker_enabled=1" # whether to shrink the pool proactively on high memory pressure
   ];
 
+  console.font = "LatArCyrHeb-16";
+
   # Síť
   networking.hostName = "t14-laptop";
   networking.networkmanager.enable = true;
+  networking.firewall.allowedTCPPorts = [
+    4713 # Pipewire sdilení zvukových zařízení přes síť  
+  ];
 
   # Internacionalizace
   time.timeZone = "Europe/Prague";
@@ -50,14 +55,14 @@
     cosmic-player
   ];
 
+  # Avahi
   services.avahi = {
     enable = true;
-    # Zapne DNS rezoluci přes Avahi
-    nssmdns4 = true;
-    nssmdns6 = true;
     publish = {
       enable = true;
       addresses = true;
+      workstation = true;
+      userServices = true; # Pro sdílení audia
     };
   };
 
