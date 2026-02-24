@@ -15,5 +15,6 @@
     songrec # Shazam klient (poznávání skladby ze zvuku)
     libreoffice
     kooha # Nahrávání obrazovky
+    wl-clipboard-rs # CLI ovládání clipboardu na Waylandu
   ];
 }

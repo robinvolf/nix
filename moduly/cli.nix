@@ -70,6 +70,7 @@ let
     translate-shell      # CLI překladač
     typst                # Sázecí nástroj, nástupce Latexu
     tinymist             # LSP server pro typst
+    restic               # Nástroj pro zálohy
   ];
 in {
   inherit programs;
