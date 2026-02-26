@@ -58,6 +58,12 @@
   # Avahi
   services.avahi = {
     enable = true;
+
+    # Zapne DNS rezoluci .local domén přes avahi
+    # Přes IPv6 to nezapínám protože spousta služeb (tiskárna) jede jen na IPv4 a při timeoutu to hlásí, že tiskárna je nedostupná
+    nssmdns4 = true;
+
+    # Co všechno o sobě rozhlašovat
     publish = {
       enable = true;
       addresses = true;
@@ -84,17 +90,6 @@
 
   # Tiskárny
   services.printing.enable = true;
-  hardware.printers = {
-    ensurePrinters = [
-      {
-        name = "Brother-DCP-9020CDW";
-        location = "Ve skříni";
-        deviceUri = "dnssd://Brother%20DCP-9020CDW._ipp._tcp.local/?uuid=e3248000-80ce-11db-8000-30055c4d1724";
-        model = "drv:///sample.drv/generic.ppd";
-      }
-    ];
-    ensureDefaultPrinter = "Brother-DCP-9020CDW";
-  };
 
   # Sice nejsu server, ale schopnost připojit se vzdáleně je velmi užitečná
   services.openssh = {
