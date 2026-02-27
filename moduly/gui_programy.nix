@@ -16,5 +16,6 @@
     libreoffice
     kooha # Nahrávání obrazovky
     wl-clipboard-rs # CLI ovládání clipboardu na Waylandu
+    gimp # Editace obrázků
   ];
 }
