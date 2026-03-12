@@ -13,5 +13,5 @@
   environment.systemPackages = with pkgs; [
     aichat # Lepší rozhraní než ollama se spoustou dalších fičurek
     whisper-cpp # Transkript audio -> text
-  ]
+  ];
 }
