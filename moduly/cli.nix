@@ -71,6 +71,7 @@ let
     typst                # Sázecí nástroj, nástupce Latexu
     tinymist             # LSP server pro typst
     restic               # Nástroj pro zálohy
+    unipicker            # Picker libovolných znaků unicode
   ];
 in {
   inherit programs;
