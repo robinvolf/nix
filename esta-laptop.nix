@@ -52,11 +52,13 @@
 
     nvtopPackages.intel  # Monitorování GPU (Intel)
     inputs.prismlauncher.packages."x86_64-linux".prismlauncher # Cracknutý minecraft launcher
+
+    spotify # Na přání slečny
   ];
 
   # Dané desktopové prostředí
-  services.xserver.desktopManager.gnome.enable = true;
-  services.xserver.displayManager.gdm.enable = true;
+  services.desktopManager.gnome.enable = true;
+  services.displayManager.gdm.enable = true;
 
   # Zapne autologin, aby nemusela zadávat heslo
   services.displayManager.autoLogin = {
@@ -79,6 +81,7 @@
 
   # Zapne flakes
   nix.settings.experimental-features = [ "nix-command" "flakes" ];
+  nixpkgs.config.allowUnfree = true; # Pro spotify
 
   ### Věci na údržbu ###
   users.users.root = {
