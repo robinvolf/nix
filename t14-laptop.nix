@@ -8,6 +8,7 @@
     ./moduly/gui_programy.nix
     ./moduly/keyd.nix
     ./moduly/ai.nix
+    ./moduly/braille.nix
   ];
 
   # Zapne flakes
@@ -22,8 +23,6 @@
     "zswap.max_pool_percent=25" # maximum percentage of RAM that zswap is allowed to use
     "zswap.shrinker_enabled=1" # whether to shrink the pool proactively on high memory pressure
   ];
-
-  console.font = "LatArCyrHeb-16";
 
   # Síť
   networking.hostName = "t14-laptop";
@@ -103,20 +102,6 @@
       PasswordAuthentication = false;
     };
   };
-
-  # Blacklistuju FreeMono, je na tom závislé mpv, ale funguje i bez toho
-  # a jinak to poskytnuje hrozně hnusné braille fonty v btm (⣀⡄⡀)
-  fonts.fontconfig.localConf = ''
-    <selectfont>
-      <rejectfont>
-          <pattern>
-              <patelt name="family" >
-                  <string>FreeMono</string>
-              </patelt>
-          </pattern>
-      </rejectfont>
-    </selectfont>
-  '';
 
   # This value determines the NixOS release from which the default
   # settings for stateful data, like file locations and database versions

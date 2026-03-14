@@ -7,6 +7,7 @@
       ./moduly/vm_test.nix
       ./moduly/gui_programy.nix
       ./moduly/keyd.nix
+      ./moduly/braille.nix
     ];
 
   # Nix konfigurace
