@@ -1,6 +1,6 @@
 (
     output: "all",
-    source: Path("/home/robin/obrazky/wallpapers/recko_2025_libuska.jpg"),
+    source: Path("/home/robin/obrazky/2026-02-23_21.17.10.png"),
     filter_by_theme: true,
     rotation_frequency: 300,
     filter_method: Lanczos,
