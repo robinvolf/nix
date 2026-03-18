@@ -39,8 +39,6 @@
     LC_TIME = "cs_CZ.UTF-8";
   };
 
-  environment.variables.EDITOR = "hx";
-
   # SSH
   services.openssh = {
     enable = true;
@@ -65,10 +63,17 @@
   environment.systemPackages = with pkgs; [
     lutris # Na gri
     inputs.prismlauncher.packages."x86_64-linux".prismlauncher # Cracknutý minecraft launcher
+    nvtopPackages.nvidia # GPU Monitoring
   ];
 
   # Desktopové prostředí
-  services.displayManager.cosmic-greeter.enable = true;
+  services.displayManager = {
+    cosmic-greeter.enable = true;
+    autoLogin = {
+      enable = true; 
+      user = "robin";
+    };
+  };
   services.desktopManager.cosmic.enable = true;
 
   environment.cosmic.excludePackages = with pkgs; [
@@ -78,6 +83,19 @@
     cosmic-player
   ];
 
+  services.sunshine = {
+    enable = true;
+    autoStart = true;
+    capSysAdmin = true;
+    openFirewall = true;
+
+    # Aby fungovalo HW enkódování pomocí NVENC
+    package = pkgs.sunshine.override {
+      cudaSupport = true;
+      cudaPackages = pkgs.cudaPackages;
+    };
+  };
+  hardware.uinput.enable = true; # Vytváření virtuální klávesnice
 
   # Načte proprietární ovladač nvidia pro Xorg a Wayland
   services.xserver.videoDrivers = ["nvidia"];

@@ -7,6 +7,7 @@
     extraGroups = [
       "networkmanager"
       "wheel" # Chcu sudo
+      "uinput" # Aby fungoval sunshine, vytváření virtuální klávesnice
     ];
     hashedPassword = "$y$j9T$CXo6N5TREXTi.QLsqIJ8G/$JOIvMeKRSluiwlVGStmvTNsTNneO37bSQDFCt9cd8Z8"; # Doufám, že toto je neverzovatelné xd
     openssh.authorizedKeys.keys = [
