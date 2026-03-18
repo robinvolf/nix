@@ -27,9 +27,6 @@
   # Síť
   networking.hostName = "t14-laptop";
   networking.networkmanager.enable = true;
-  networking.firewall.allowedTCPPorts = [
-    4713 # Pipewire sdilení zvukových zařízení přes síť  
-  ];
 
   # Internacionalizace
   time.timeZone = "Europe/Prague";
@@ -102,6 +99,14 @@
       PasswordAuthentication = false;
     };
   };
+
+  # Override výchozího balíčku pro ollama, moje gpu podporuje Vulkan
+  services.ollama.package = pkgs.ollama-vulkan;
+
+  environment.systemPackages = with pkgs; [
+    moonlight-qt # Gamestreaming klient
+    nvtopPackages.amd # Monitoring GPU pro AMD
+  ];
 
   # This value determines the NixOS release from which the default
   # settings for stateful data, like file locations and database versions
