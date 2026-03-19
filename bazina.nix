@@ -64,6 +64,7 @@
     lutris # Na gri
     inputs.prismlauncher.packages."x86_64-linux".prismlauncher # Cracknutý minecraft launcher
     nvtopPackages.nvidia # GPU Monitoring
+    whisper-cpp-vulkan # Přepis řeč na text
   ];
 
   # Desktopové prostředí
