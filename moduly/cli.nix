@@ -1,6 +1,6 @@
 # Všechny CLI utilitky, které používám
 
-{pkgs, ...}:
+{pkgs, inputs, ...}:
 let 
   # Základ
   programs.git.enable = true; # Git
@@ -27,10 +27,11 @@ let
   programs.openvpn3.enable = true;       # Pro VPNku
   internet = with pkgs; [
     pkgs.curl # CLI stahovač z internetu
-    pkgs.yt-dlp        # Stahovač YT videí
     pkgs.speedtest-cli # Klient pro měření rychlosti internetového připojení
     pkgs.rsync         # Přenos souborů
     pkgs.bandwhich     # Vypíše využití sítě podle adres/procesů
+  ] ++ [
+    inputs.nixpkgsFresh.legacyPackages.x86_64-linux.yt-dlp # Stahovač YT videí
   ];
 
   # Hardware
