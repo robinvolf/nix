@@ -101,7 +101,8 @@
   };
 
   # Override výchozího balíčku pro ollama, moje gpu podporuje Vulkan
-  services.ollama.package = pkgs.ollama-vulkan;
+  # Beru ho z nových nixpkgs, protože nové modely vyžadují novou verzi ollama
+  services.ollama.package = inputs.nixpkgsFresh.legacyPackages."x86_64-linux".ollama-vulkan;
 
   environment.systemPackages = with pkgs; [
     moonlight-qt # Gamestreaming klient
