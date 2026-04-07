@@ -17,6 +17,7 @@
     wl-clipboard-rs # CLI ovládání clipboardu na Waylandu
     gimp # Editace obrázků
     libnotify # CLI Notifikace
+    pwvucontrol # GUI pro mix zvuku
   ] ++ [
     inputs.nixpkgsFresh.legacyPackages.x86_64-linux.freetube # Frontend pro YouTube
   ];
