@@ -9,6 +9,7 @@
     ./moduly/keyd.nix
     ./moduly/ai.nix
     ./moduly/braille.nix
+    ./moduly/tisk.nix
   ];
 
   # Zapne flakes
@@ -84,9 +85,6 @@
 
   services.logind.settings.Login.HandlePowerKey = "hibernate";
   services.logind.settings.Login.HandlePowerKeyLongPress = "poweroff";
-
-  # Tiskárny
-  services.printing.enable = true;
 
   # Sice nejsu server, ale schopnost připojit se vzdáleně je velmi užitečná
   services.openssh = {

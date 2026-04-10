@@ -5,6 +5,7 @@
   imports = [
     ./hardware.nix
     ./moduly/cli.nix
+    ./moduly/tisk.nix
   ];
 
   # Bootloader.
@@ -111,22 +112,6 @@
     };
   };
 
-  # Tiskárny
-  services.printing.enable = true;
-
-  hardware.printers = {
-    ensurePrinters = [
-      {
-        name = "Brother-DCP-9020CDW";
-        location = "Ve skříni";
-        deviceUri = "dnssd://Brother%20DCP-9020CDW._ipp._tcp.local/?uuid=e3248000-80ce-11db-8000-30055c4d1724";
-        model = "drv:///sample.drv/generic.ppd";
-      }
-    ];
-
-    ensureDefaultPrinter = "Brother-DCP-9020CDW";
-  };
-  
   # This value determines the NixOS release from which the default
   # settings for stateful data, like file locations and database versions
   # on your system were taken. It‘s perfectly fine and recommended to leave
