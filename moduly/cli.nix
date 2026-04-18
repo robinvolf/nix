@@ -30,6 +30,7 @@ let
     pkgs.speedtest-cli # Klient pro měření rychlosti internetového připojení
     pkgs.rsync         # Přenos souborů
     pkgs.bandwhich     # Vypíše využití sítě podle adres/procesů
+    pkgs.linux-wifi-hotspot # Easy vytvoření hotspotu
   ] ++ [
     inputs.nixpkgsFresh.legacyPackages.x86_64-linux.yt-dlp # Stahovač YT videí
   ];
@@ -73,6 +74,7 @@ let
     tinymist             # LSP server pro typst
     restic               # Nástroj pro zálohy
     unipicker            # Picker libovolných znaků unicode
+    poppler-utils        # Utilitky pro hraní s pdfkama
   ];
 in {
   inherit programs;
