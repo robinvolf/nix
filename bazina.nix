@@ -8,7 +8,6 @@
       ./moduly/gui_programy.nix
       ./moduly/keyd.nix
       ./moduly/braille.nix
-      ./moduly/ai.nix
     ];
 
   # Nix konfigurace
@@ -124,9 +123,6 @@
     # Optionally, you may need to select the appropriate driver version for your specific GPU.
     package = config.boot.kernelPackages.nvidiaPackages.stable;
   };
-
-  nixpkgs.config.allowUnfree = true; # Kvůli CUDA akceleraci 😢
-  services.ollama.package = inputs.nixpkgsFresh.legacyPackages."x86_64-linux".ollama-cuda;
 
   # This value determines the NixOS release from which the default
   # settings for stateful data, like file locations and database versions
