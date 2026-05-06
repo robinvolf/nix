@@ -26,13 +26,12 @@ let
   # Internet
   programs.openvpn3.enable = true;       # Pro VPNku
   internet = with pkgs; [
-    pkgs.curl # CLI stahovač z internetu
-    pkgs.speedtest-cli # Klient pro měření rychlosti internetového připojení
-    pkgs.rsync         # Přenos souborů
-    pkgs.bandwhich     # Vypíše využití sítě podle adres/procesů
-    pkgs.linux-wifi-hotspot # Easy vytvoření hotspotu
-  ] ++ [
-    inputs.nixpkgsFresh.legacyPackages.x86_64-linux.yt-dlp # Stahovač YT videí
+    curl # CLI stahovač z internetu
+    speedtest-cli # Klient pro měření rychlosti internetového připojení
+    rsync         # Přenos souborů
+    bandwhich     # Vypíše využití sítě podle adres/procesů
+    linux-wifi-hotspot # Easy vytvoření hotspotu
+    yt-dlp # Stahovač YT videí
   ];
 
   # Hardware

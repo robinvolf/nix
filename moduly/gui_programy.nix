@@ -19,7 +19,6 @@
     libnotify # CLI Notifikace
     pwvucontrol # GUI pro mix zvuku
     musescore # Editor not
-  ] ++ [
-    inputs.nixpkgsFresh.legacyPackages.x86_64-linux.freetube # Frontend pro YouTube
+    freetube # Frontend pro YouTube
   ];
 }
