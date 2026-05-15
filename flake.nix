@@ -5,6 +5,10 @@
     nixpkgs.url = "github:NixOS/nixpkgs/nixos-unstable";
     ekkles.url = "github:robinvolf/ekkles/v26.02";
     prismlauncher.url = "github:Diegiwg/PrismLauncher-Cracked/10.0.2";
+    dms-plugin-registry = {
+      url = "github:AvengeMedia/dms-plugin-registry";
+      inputs.nixpkgs.follows = "nixpkgs";
+    };
   };
 
   outputs = {self, nixpkgs, ...}@inputs : {

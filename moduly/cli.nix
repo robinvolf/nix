@@ -74,12 +74,11 @@ let
     restic               # Nástroj pro zálohy
     unipicker            # Picker libovolných znaků unicode
     poppler-utils        # Utilitky pro hraní s pdfkama
+    pandoc               # Konverze *všech* dokumentových formátů
   ];
 in {
   inherit programs;
   environment.systemPackages = basic ++ classicSubstitutes ++ internet ++ hardware ++ manuals ++ utilities;
-
-  console.font = "LatArCyrHeb-16";
 
   environment.variables = {
     EDITOR = "hx";

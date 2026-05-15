@@ -10,6 +10,7 @@
     ./moduly/ai.nix
     ./moduly/braille.nix
     ./moduly/tisk.nix
+    inputs.dms-plugin-registry.modules.default
   ];
 
   # Zapne flakes
@@ -44,14 +45,44 @@
     LC_TIME = "cs_CZ.UTF-8";
   };
 
-  # Desktopové prostředí cosmic
-  services.desktopManager.cosmic.enable = true;  
-  environment.cosmic.excludePackages = with pkgs; [
-    cosmic-edit
-    cosmic-store
-    cosmic-reader
-    cosmic-player
-  ];
+  # Kompozitor
+  programs.niri.enable = true;
+  # Desktopový shell
+  programs.dms-shell = {
+    enable = true;
+
+    systemd = {
+      enable = true;             # Systemd služba pro automatické spouštění
+      restartIfChanged = true;   # Automaticky restartovat službu dms.service, když se změní prostředí dms
+    };
+  
+    enableSystemMonitoring = true;     # Widgety pro monitorování systému (dgop)
+    enableDynamicTheming = true;       # Motivy založené na tapetách (matugen)
+    enableClipboardPaste = true;       # Vkládání z historie schránky (wtype)
+
+    enableVPN = false;                  # Widget pro správu VPN
+    enableAudioWavelength = false;      # Audio vizualizér (cava)
+    enableCalendarEvents = false;       # Integrace kalendáře (khal)
+
+    plugins = {
+      # Simply enable plugins by their ID (from the registry)
+      dankBatteryAlerts.enable = true;
+      amdGpuMonitor.enable = true;
+    };
+  };
+
+  # Bez tohoto nefunguje na dms BT ani ukazatel nabití baterky
+  hardware.bluetooth.enable = true;
+  services.upower.enable = true;
+
+  # Display Manager
+  services.displayManager.dms-greeter = {
+    enable = true;
+    compositor.name = "niri"; # Required. Can be also "hyprland" or "sway"
+
+    # Synchronizuje barvičky greeteru s dmskem
+    configHome = "/home/robin";
+  };
 
   # Avahi
   services.avahi = {
@@ -70,33 +101,8 @@
     };
   };
 
-  # Display Manager
-  services.greetd = let
-    greetMsg = "Chválu vzdejte Hospodinu, protože je dobrý";
-  in {
-    enable = true;
-    settings = {
-      default_session = {
-        command = "${pkgs.tuigreet}/bin/tuigreet --remember --remember-user-session --asterisks --time --greeting '${greetMsg}' --cmd '${pkgs.fish}/bin/fish'";
-        user = "greeter";
-      };
-    };
-  };
-
   services.logind.settings.Login.HandlePowerKey = "hibernate";
   services.logind.settings.Login.HandlePowerKeyLongPress = "poweroff";
-
-  # Sice nejsu server, ale schopnost připojit se vzdáleně je velmi užitečná
-  services.openssh = {
-    enable = true;
-    settings = {
-      PermitRootLogin = "no";
-      AllowUsers = [ # Lze se připojit pouze jako uživatel robin
-        "robin"  
-      ];
-      PasswordAuthentication = false;
-    };
-  };
 
   # Override výchozího balíčku pro ollama, moje gpu podporuje Vulkan
   # Beru ho z nových nixpkgs, protože nové modely vyžadují novou verzi ollama
@@ -104,7 +110,7 @@
 
   environment.systemPackages = with pkgs; [
     moonlight-qt # Gamestreaming klient
-    nvtopPackages.amd # Monitoring GPU pro AMD
+    amdgpu_top # Pro dms plugin amdGpuMonitor
   ];
 
   # This value determines the NixOS release from which the default

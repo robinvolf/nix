@@ -9,8 +9,6 @@
     legcord # Discord klient
     signal-desktop # Kecátko
     rnote # Kreslení, poznámky
-    mpv # Přehrávání videí
-    mpvScripts.quality-menu # Výběr kvality pro youtube videa přes mpv
     songrec # Shazam klient (poznávání skladby ze zvuku)
     libreoffice
     kooha # Nahrávání obrazovky
@@ -20,5 +18,11 @@
     pwvucontrol # GUI pro mix zvuku
     musescore # Editor not
     freetube # Frontend pro YouTube
-  ];
+  ] ++ (with pkgs; [
+    ( mpv.override { scripts = [
+      mpvScripts.mpris # mpris integrace
+      mpvScripts.quality-menu # Výběr kvality pro youtube videa přes mpv
+    ]; } )
+  ]);
+  
 }
