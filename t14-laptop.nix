@@ -15,6 +15,8 @@
 
   # Zapne flakes
   nix.settings.experimental-features = [ "nix-command" "flakes" ];
+  # Deduplikace souborů při každém build-u
+  nix.settings.auto-optimise-store = true;
 
   # Bootloader.
   boot.loader.systemd-boot.enable = true;
@@ -111,6 +113,7 @@
   environment.systemPackages = with pkgs; [
     moonlight-qt # Gamestreaming klient
     amdgpu_top # Pro dms plugin amdGpuMonitor
+    xwayland-satellite # Pro niri, aby se mohly spouštět X11 programy
   ];
 
   # This value determines the NixOS release from which the default
