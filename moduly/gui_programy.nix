@@ -1,5 +1,18 @@
-{pkgs, inputs, ...}:{
+{pkgs, inputs, lib, ...}:{
   programs.firefox.enable = true;
+
+  nixpkgs.config = {
+    packageOverrides = pkgs: {
+      factorio = pkgs.factorio.override {
+        username = "Kamikatze_312";
+        token = builtins.readFile ./factorio_token;
+      };
+    };
+
+    allowUnfreePredicate = pkg: builtins.elem (lib.getName pkg) [
+     "factorio-alpha" # Má unfree licenci
+    ];
+  };
 
   environment.systemPackages = with pkgs; [
     alacritty-graphics # Fork alacritty s podporou grafických protokolů pro obrázky v terminálu
@@ -18,6 +31,10 @@
     pwvucontrol # GUI pro mix zvuku
     musescore # Editor not
     freetube # Frontend pro YouTube
+
+    # Hry <3
+    openttd
+    factorio
   ] ++ (with pkgs; [
     ( mpv.override { scripts = [
       mpvScripts.mpris # mpris integrace
