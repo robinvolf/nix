@@ -116,6 +116,11 @@
     xwayland-satellite # Pro niri, aby se mohly spouštět X11 programy
   ];
 
+  environment.sessionVariables = {
+    SDL_VIDEO_DRIVER = "wayland"; # Přinutí SDL programy, aby běžely na waylandu (např. openttd)
+  };
+  
+
   # This value determines the NixOS release from which the default
   # settings for stateful data, like file locations and database versions
   # on your system were taken. It‘s perfectly fine and recommended to leave
