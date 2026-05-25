@@ -1,7 +1,7 @@
 { config, pkgs, inputs, ... }:{
   imports = [
     # Moje drahocenné CLI nástroje
-    ./hardware.nix
+    ./hardware/t14-laptop.nix
     ./moduly/cli.nix
     ./moduly/robin.nix
     ./moduly/vm_test.nix

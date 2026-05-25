@@ -1,7 +1,7 @@
 { config, pkgs, inputs, ... }:{
   imports =
     [
-      ./hardware.nix
+      ./hardware/bazina.nix
       ./moduly/cli.nix # CLI utilitky
       ./moduly/robin.nix
       ./moduly/vm_test.nix
@@ -39,13 +39,19 @@
     LC_TIME = "cs_CZ.UTF-8";
   };
 
+  # Pro updaty, za roota se můžu přihlásit daným klíčem
+  users.users.root = {
+    openssh.authorizedKeys.keys = [
+      "ecdsa-sha2-nistp256 AAAAE2VjZHNhLXNoYTItbmlzdHAyNTYAAAAIbmlzdHAyNTYAAABBBIQYzKYSgupG/+DqyyuckdvyiXHE18hHdYI8PsI2Mq/l3IurBsDEkifkHRdDEBW35fIclxfPzuIjrNVh2YnFBFA= robin@t14-laptop"
+    ];
+  };
+
   # SSH
   services.openssh = {
     enable = true;
     settings = {
       PasswordAuthentication = false;
       KbdInteractiveAuthentication = false;
-      PermitRootLogin = "no";
     };
   };
 
@@ -65,24 +71,35 @@
     inputs.prismlauncher.packages."x86_64-linux".prismlauncher # Cracknutý minecraft launcher
     nvtopPackages.nvidia # GPU Monitoring
     whisper-cpp-vulkan # Přepis řeč na text
+    fuzzel # Defaultní launcher v niri
+    xwayland-satellite # Pro niri 
   ];
 
-  # Desktopové prostředí
+  # rtkit (volitelný, doporučený) umožňuje Pipewire používat sheduling v reálném čase pro zvýšení výkonu
+  security.rtkit.enable = true;
+  services.pipewire.pulse.enable = true; # Sunshine potřebuje pulse-audio
+
+  # Aktuálně je openldap rozbitý, toto je hotfix
+  nixpkgs.overlays = [
+    (_: prev: {
+      openldap = prev.openldap.overrideAttrs {
+        doCheck = !prev.stdenv.hostPlatform.isi686;
+      };
+    })
+  ];
+
+  programs.niri.enable = true; # Kompozitor
+  security.polkit.enable = true; # Niri není DE, takže musíme separátně nastavit
   services.displayManager = {
-    cosmic-greeter.enable = true;
+    sddm = {
+      enable = true;
+      wayland.enable = true;
+    };
     autoLogin = {
       enable = true; 
       user = "robin";
     };
   };
-  services.desktopManager.cosmic.enable = true;
-
-  environment.cosmic.excludePackages = with pkgs; [
-    cosmic-edit
-    cosmic-store
-    cosmic-reader
-    cosmic-player
-  ];
 
   services.sunshine = {
     enable = true;
