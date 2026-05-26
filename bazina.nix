@@ -8,6 +8,7 @@
       ./moduly/gui_programy.nix
       ./moduly/keyd.nix
       ./moduly/braille.nix
+      ./moduly/root_update.nix
     ];
 
   # Nix konfigurace
@@ -37,22 +38,6 @@
     LC_PAPER = "cs_CZ.UTF-8";
     LC_TELEPHONE = "cs_CZ.UTF-8";
     LC_TIME = "cs_CZ.UTF-8";
-  };
-
-  # Pro updaty, za roota se můžu přihlásit daným klíčem
-  users.users.root = {
-    openssh.authorizedKeys.keys = [
-      "ecdsa-sha2-nistp256 AAAAE2VjZHNhLXNoYTItbmlzdHAyNTYAAAAIbmlzdHAyNTYAAABBBIQYzKYSgupG/+DqyyuckdvyiXHE18hHdYI8PsI2Mq/l3IurBsDEkifkHRdDEBW35fIclxfPzuIjrNVh2YnFBFA= robin@t14-laptop"
-    ];
-  };
-
-  # SSH
-  services.openssh = {
-    enable = true;
-    settings = {
-      PasswordAuthentication = false;
-      KbdInteractiveAuthentication = false;
-    };
   };
 
   # Avahi

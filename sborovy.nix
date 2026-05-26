@@ -1,14 +1,13 @@
-{ config, pkgs, inputs, ... }:
+{config, pkgs, inputs, ... }:{
 
-{
-  # HW konfigurace
   imports = [
-    ./hardware.nix
+    # HW konfigurace
+    ./hardware/x1-laptop.nix
     ./moduly/cli.nix # Chcu tam mít svoje CLI utilitky
+    ./moduly/root_update.nix
+    ./moduly/bootloader.nix
+    ./moduly/avahi.nix
   ];
-
-  # /tmp bude opravdu tmpfs RAMce
-  boot.tmp.useTmpfs = true;
 
   # Síť
   networking.hostName = "sborovy";
@@ -37,11 +36,12 @@
       "networkmanager"
     ];
     hashedPassword = "$y$j9T$roKp49iXFTXqR0W4JENMn.$vrnVh19SU8F0oVpAa0BifOM6VTrm5hH0b8atC8WJ8C8";
+    createHome = true;
   };
 
   # Dané desktopové prostředí
-  services.xserver.desktopManager.gnome.enable = true;
-  services.xserver.displayManager.gdm.enable = true;
+  services.desktopManager.gnome.enable = true;
+  services.displayManager.gdm.enable = true;
 
   # Zapne autologin při zapnutí pod uživatelem prezetner
   services.displayManager.autoLogin = {
@@ -69,30 +69,6 @@
   # Zapne flakes
   nix.settings.experimental-features = [ "nix-command" "flakes" ];
 
-  ### Věci na údržbu ###
-  # Povolíme připojení přes SSH pro uživatele root, abych se mohl na počítač vzdáleně připojit
-  # a měnit /etc/nixos
-  users.users.root = {
-    openssh.authorizedKeys.keys = [
-      "ecdsa-sha2-nistp256 AAAAE2VjZHNhLXNoYTItbmlzdHAyNTYAAAAIbmlzdHAyNTYAAABBBIQYzKYSgupG/+DqyyuckdvyiXHE18hHdYI8PsI2Mq/l3IurBsDEkifkHRdDEBW35fIclxfPzuIjrNVh2YnFBFA= robin@t14-laptop"
-    ];
-  };
-
-  services.openssh = {
-    enable = true;
-    settings.PermitRootLogin = "without-password";
-  };
-
-  # Abych našel počítač přes mDNS (nemusím pak ssh root@192.168.xxx.xxx ale ssh root@sborovy.local)
-  services.avahi = {
-    enable = true;
-    publish = {
-      enable = true;
-      addresses = true;
-      workstation = true;
-    };
-  };
-  # bruh = builtins.trace inputs.ekkles.packages inputs.ekkles.packages;
   environment.systemPackages = [
     pkgs.firefox # Browser    
     pkgs.vlc # Na přehrávání médií

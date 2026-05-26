@@ -10,6 +10,8 @@
     ./moduly/ai.nix
     ./moduly/braille.nix
     ./moduly/tisk.nix
+    ./moduly/bootloader.nix
+    ./moduly/avahi.nix
     inputs.dms-plugin-registry.modules.default
   ];
 
@@ -17,16 +19,6 @@
   nix.settings.experimental-features = [ "nix-command" "flakes" ];
   # Deduplikace souborů při každém build-u
   nix.settings.auto-optimise-store = true;
-
-  # Bootloader.
-  boot.loader.systemd-boot.enable = true;
-  boot.loader.efi.canTouchEfiVariables = true;
-  boot.tmp.useTmpfs = true; # /tmp bude uložené jen v RAMce
-  boot.kernelParams = [
-    "zswap.enabled=1" # enables zswap
-    "zswap.max_pool_percent=25" # maximum percentage of RAM that zswap is allowed to use
-    "zswap.shrinker_enabled=1" # whether to shrink the pool proactively on high memory pressure
-  ];
 
   # Síť
   networking.hostName = "t14-laptop";
@@ -86,23 +78,6 @@
     configHome = "/home/robin";
   };
 
-  # Avahi
-  services.avahi = {
-    enable = true;
-
-    # Zapne DNS rezoluci .local domén přes avahi
-    # Přes IPv6 to nezapínám protože spousta služeb (tiskárna) jede jen na IPv4 a při timeoutu to hlásí, že tiskárna je nedostupná
-    nssmdns4 = true;
-
-    # Co všechno o sobě rozhlašovat
-    publish = {
-      enable = true;
-      addresses = true;
-      workstation = true;
-      userServices = true; # Pro sdílení audia
-    };
-  };
-
   services.logind.settings.Login.HandlePowerKey = "hibernate";
   services.logind.settings.Login.HandlePowerKeyLongPress = "poweroff";
 
@@ -119,7 +94,6 @@
   environment.sessionVariables = {
     SDL_VIDEO_DRIVER = "wayland"; # Přinutí SDL programy, aby běžely na waylandu (např. openttd)
   };
-  
 
   # This value determines the NixOS release from which the default
   # settings for stateful data, like file locations and database versions
