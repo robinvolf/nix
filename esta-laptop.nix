@@ -3,9 +3,11 @@
 {
   # HW konfigurace
   imports = [
-    ./hardware.nix
+    ./hardware/esta-laptop.nix
     ./moduly/cli.nix
     ./moduly/tisk.nix
+    ./moduly/avahi.nix
+    ./moduly/root_update.nix
   ];
 
   # Bootloader.
@@ -83,34 +85,6 @@
   # Zapne flakes
   nix.settings.experimental-features = [ "nix-command" "flakes" ];
   nixpkgs.config.allowUnfree = true; # Pro spotify
-
-  ### Věci na údržbu ###
-  users.users.root = {
-    openssh.authorizedKeys.keys = [
-      "ecdsa-sha2-nistp256 AAAAE2VjZHNhLXNoYTItbmlzdHAyNTYAAAAIbmlzdHAyNTYAAABBBIQYzKYSgupG/+DqyyuckdvyiXHE18hHdYI8PsI2Mq/l3IurBsDEkifkHRdDEBW35fIclxfPzuIjrNVh2YnFBFA= robin@t14-laptop"
-    ];
-  };
-
-  # SSH a Avahi, abych se mohl připojovat na počítač pro údržbu
-  services.openssh = {
-    enable = true;
-    settings.PermitRootLogin = "prohibit-password";
-    # Nebudeme pokoušet, nepůjde se přihlásit přes heslo
-    settings.PasswordAuthentication = false;
-  };
-  services.avahi = {
-    enable = true;
-
-    # Pro tisk
-    nssmdns4 = true;
-    openFirewall = true;
-
-    publish = {
-      enable = true;
-      addresses = true;
-      workstation = true;
-    };
-  };
 
   # This value determines the NixOS release from which the default
   # settings for stateful data, like file locations and database versions
