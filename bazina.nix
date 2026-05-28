@@ -86,6 +86,7 @@
     };
   };
 
+  # Hraní na dálku
   services.sunshine = {
     enable = true;
     autoStart = true;
@@ -99,6 +100,11 @@
     };
   };
   hardware.uinput.enable = true; # Vytváření virtuální klávesnice
+  # By-default se zvukové servicy nezapnou při vytvoření session s niri,
+  # sunshine potom selže ve vytváření audio přenosu, takto se audio
+  # zapne před sunshine a bude mu při startu k dispozici
+  systemd.user.services.sunshine.after = [ "pipewire-pulse.service" ];
+  systemd.user.services.sunshine.requires = [ "pipewire-pulse.service" ];
 
   # Načte proprietární ovladač nvidia pro Xorg a Wayland
   services.xserver.videoDrivers = ["nvidia"];
