@@ -54,6 +54,7 @@
   environment.systemPackages = with pkgs; [
     lutris # Na gri
     inputs.prismlauncher.packages."x86_64-linux".prismlauncher # Cracknutý minecraft launcher
+    openjdk25 # Pro minecraft 26
     nvtopPackages.nvidia # GPU Monitoring
     whisper-cpp-vulkan # Přepis řeč na text
     fuzzel # Defaultní launcher v niri

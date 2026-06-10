@@ -55,6 +55,7 @@
 
     nvtopPackages.intel  # Monitorování GPU (Intel)
     inputs.prismlauncher.packages."x86_64-linux".prismlauncher # Cracknutý minecraft launcher
+    openjdk25 # Pro minecraft 26
 
     spotify # Na přání slečny
   ];
