@@ -30,11 +30,14 @@
     libnotify # CLI Notifikace
     pwvucontrol # GUI pro mix zvuku
     musescore # Editor not
-    freetube # Frontend pro YouTube
+
+    # Papá moc času, raději koukat na filmy
+    # freetube # Frontend pro YouTube
 
     # Hry <3
     openttd
     factorio
+
   ] ++ (with pkgs; [
     ( mpv.override { scripts = [
       mpvScripts.mpris # mpris integrace
