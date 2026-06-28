@@ -1,6 +1,6 @@
 # Všechny CLI utilitky, které používám
 
-{pkgs, inputs, ...}:
+{pkgs,  ...}:
 let 
   # Základ
   programs.git.enable = true; # Git
@@ -8,6 +8,8 @@ let
   basic = with pkgs; [
     helix # Textový editor
     zellij # Terminálový multiplexor + integrovaný "screen"
+    nil # LSP server pro Nix
+    devenv # Nástroj pro vývojové prostředí v nixu
   ];
 
   # Náhrady klasických příkazů
@@ -48,7 +50,7 @@ let
     dev.enable = true; # Zahrne manuálové stránky pro vývoj
     man = {
       enable = true;
-      generateCaches = true; # Kešuje indexaci manuálových stránek, aby se v ní dalo hledat
+      cache.enable = true; # Kešuje indexaci manuálových stránek, aby se v ní dalo hledat
     };
   };
   manuals = [pkgs.tealdeer]; # Výcuc manuálových stránek
@@ -83,4 +85,6 @@ in {
   environment.variables = {
     EDITOR = "hx";
   };
+
+  documentation = documentation;
 }
