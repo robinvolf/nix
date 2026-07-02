@@ -4,6 +4,7 @@
     environmentVariables = {
       OLLAMA_CONTEXT_LENGTH = "32000"; # Pro agenty, potřebujou hodně velký kontext
       OLLAMA_KEEP_ALIVE = "30m"; # Modely budou načtené v paměti alespoň 15min po promptu
+      OLLAMA_IGPU_ENABLE = "1"; # By-default má vypnutou podporu iGPU, tohle ji zapne
     };
 
     # Aby naslouchal i připojením, které jdou zvenku
