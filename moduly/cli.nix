@@ -73,11 +73,12 @@ let
     translate-shell      # CLI překladač
     typst                # Sázecí nástroj, nástupce Latexu
     tinymist             # LSP server pro typst
-    restic               # Nástroj pro zálohy
+    rustic               # Nástroj pro zálohy
     unipicker            # Picker libovolných znaků unicode
     poppler-utils        # Utilitky pro hraní s pdfkama
     pandoc               # Konverze *všech* dokumentových formátů
   ];
+  programs.fuse.userAllowOther = true; # Pro rustic mount
 in {
   inherit programs;
   environment.systemPackages = basic ++ classicSubstitutes ++ internet ++ hardware ++ manuals ++ utilities;

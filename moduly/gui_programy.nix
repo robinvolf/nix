@@ -1,4 +1,4 @@
-{pkgs, inputs, lib, ...}:{
+{pkgs, lib, ...}:{
   programs.firefox.enable = true;
 
   nixpkgs.config = {
@@ -32,7 +32,7 @@
     musescore # Editor not
 
     # Papá moc času, raději koukat na filmy
-    # freetube # Frontend pro YouTube
+    freetube # Frontend pro YouTube
 
     # Hry <3
     openttd
