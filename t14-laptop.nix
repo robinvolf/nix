@@ -1,4 +1,4 @@
-{ config, pkgs, inputs, ... }:{
+{ pkgs, inputs, ... }:{
   imports = [
     # Moje drahocenné CLI nástroje
     ./hardware/t14-laptop.nix
@@ -12,7 +12,7 @@
     ./moduly/tisk.nix
     ./moduly/bootloader.nix
     ./moduly/avahi.nix
-    inputs.dms-plugin-registry.modules.default
+    inputs.dms-plugin-registry.nixosModules.default
   ];
 
   # Zapne flakes

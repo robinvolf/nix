@@ -1,18 +1,10 @@
 {pkgs, lib, ...}:{
   programs.firefox.enable = true;
 
-  nixpkgs.config = {
-    packageOverrides = pkgs: {
-      factorio = pkgs.factorio.override {
-        username = "Kamikatze_312";
-        token = builtins.readFile ./factorio_token;
-      };
-    };
-
-    allowUnfreePredicate = pkg: builtins.elem (lib.getName pkg) [
-     "factorio-alpha" # Má unfree licenci
-    ];
-  };
+  nixpkgs.config.allowUnfreePredicate = pkg: builtins.elem (lib.getName pkg) [
+   "steam" # Pro lutris
+   "steam-unwrapped"
+  ];
 
   environment.systemPackages = with pkgs; [
     alacritty-graphics # Fork alacritty s podporou grafických protokolů pro obrázky v terminálu
@@ -34,9 +26,9 @@
     # Papá moc času, raději koukat na filmy
     freetube # Frontend pro YouTube
 
-    # Hry <3
-    openttd
-    factorio
+    # Na Hry <3
+    # Podle mě je lepší mít na hry oddělený management než pro normální systémové balíčky
+    lutris
 
   ] ++ (with pkgs; [
     ( mpv.override { scripts = [
